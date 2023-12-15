@@ -1,6 +1,7 @@
 package com.aoc;
 
-public class Afiicheur implements ObserverCapteur{
+public class Afficheur implements ObserverDeCapteur{
+
     @Override
     public void update(Capteur capteur) {
 

@@ -2,12 +2,12 @@ package com.aoc;
 
 public class CapteurImp implements Capteur{
     @Override
-    public void attach(ObserverCapteur observerCapteur) {
+    public void attach(ObserverDeCapteur observerCapteur) {
 
     }
 
     @Override
-    public void detach(ObserverCapteur observerCapteur) {
+    public void detach(ObserverDeCapteur observerCapteur) {
 
     }
 
