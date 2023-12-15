@@ -1,6 +1,8 @@
 package com.aoc;
 
-public class Afficheur implements ObserverCapteur{
+import com.aoc.servent.ObserverDeCapteur;
+
+public class Afficheur implements ObserverDeCapteur {
     @Override
     public void update(Capteur capteur) {
 

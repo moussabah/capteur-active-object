@@ -2,16 +2,11 @@ package com.aoc;
 
 public class DiffusionAtomique implements AlgoDiffusion{
 
-
     private Capteur capteur;
 
-    private DiffusionAtomique(Capteur capteur){
-        this.capteur = capteur;
-    }
-
     @Override
-    public void configure() {
-
+    public void configure(Capteur capteur) {
+        this.capteur = capteur;
     }
 
     @Override

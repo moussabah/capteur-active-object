@@ -1,10 +1,10 @@
 package com.aoc;
 
-import com.aoc.ObserverCapteur;
+import com.aoc.servent.ObserverDeCapteur;
 
 public interface Capteur {
-    public void attach(ObserverCapteur observerCapteur);
-    public void detach(ObserverCapteur observerCapteur);
+    public void attach(ObserverDeCapteur observerCapteur);
+    public void detach(ObserverDeCapteur observerCapteur);
     public int getValue();
     public void tick();
 }
