@@ -18,6 +18,10 @@ public class DiffusionAtomique implements AlgoDiffusion{
     @Override
     public void execute() {
         this.capteur.lock();
+        this.observerDeCapteurAsyncs.forEach(observer -> {
+            observer.update(this.capteur);
+        });
+        this.capteur.unlock();
     }
 
     public Capteur getCapteur() {

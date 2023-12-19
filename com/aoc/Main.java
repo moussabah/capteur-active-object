@@ -14,6 +14,7 @@ public class Main {
         observerDeCapteurAsyncs.add(new Canal());
         observerDeCapteurAsyncs.add(new Canal());
         observerDeCapteurAsyncs.add(new Canal());
+        observerDeCapteurAsyncs.add(new Canal());
         Capteur c = new CapteurImpl(observerDeCapteurAsyncs, alog);
         c.tick();
     }
