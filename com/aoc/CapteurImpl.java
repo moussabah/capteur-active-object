@@ -46,15 +46,11 @@ public class CapteurImpl implements  Capteur{
     @Override
     public void tick() {
         if (!this.lock){
-            this.updateValue();
+            this.value++;
+            algoDiffusion.execute();
             this.observerDeCapteurAsyncs.forEach(observer -> {
                 observer.update(this);
             });
         }
-    }
-
-
-    private void updateValue(){
-        this.value++;
     }
 }
