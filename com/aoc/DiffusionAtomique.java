@@ -1,17 +1,23 @@
 package com.aoc;
 
+import com.aoc.proxy.ObserverDeCapteurAsync;
+
+import java.util.List;
+
 public class DiffusionAtomique implements AlgoDiffusion{
 
     private Capteur capteur;
+    private List<ObserverDeCapteurAsync> observerDeCapteurAsyncs;
 
     @Override
-    public void configure(Capteur capteur) {
+    public void configure(Capteur capteur, List<ObserverDeCapteurAsync> observerDeCapteurAsyncs) {
         this.capteur = capteur;
+        this.observerDeCapteurAsyncs = observerDeCapteurAsyncs;
     }
 
     @Override
     public void execute() {
-        this.capteur.
+        this.capteur.lock();
     }
 
     public Capteur getCapteur() {

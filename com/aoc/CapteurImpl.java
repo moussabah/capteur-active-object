@@ -13,7 +13,7 @@ public class CapteurImpl implements  Capteur{
     public CapteurImpl(List<ObserverDeCapteurAsync> observerDeCapteurAsyncs, AlgoDiffusion algoDiffusion){
         this.observerDeCapteurAsyncs = observerDeCapteurAsyncs;
         this.algoDiffusion = algoDiffusion;
-        this.algoDiffusion.configure(this);
+        this.algoDiffusion.configure(this, this.observerDeCapteurAsyncs);
     }
 
     private int value = 0;
