@@ -18,6 +18,16 @@ public class CapteurImpl implements  Capteur{
 
     private int value = 0;
 
+    private boolean lock = false;
+
+    public void lock(){
+        this.lock = true;
+    }
+
+    public void unlock(){
+        this.lock = false;
+    }
+
     @Override
     public void attach(ObserverDeCapteur observerCapteur) {
 
@@ -35,6 +45,16 @@ public class CapteurImpl implements  Capteur{
 
     @Override
     public void tick() {
+        if (!this.lock){
+            this.updateValue();
+            this.observerDeCapteurAsyncs.forEach(observer -> {
+                observer.update(this);
+            });
+        }
+    }
+
+
+    private void updateValue(){
         this.value++;
     }
 }
