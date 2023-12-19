@@ -20,10 +20,12 @@ public class CapteurImpl implements  Capteur{
 
     private boolean lock = false;
 
+    @Override
     public void lock(){
         this.lock = true;
     }
 
+    @Override
     public void unlock(){
         this.lock = false;
     }

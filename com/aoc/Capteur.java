@@ -7,4 +7,8 @@ public interface Capteur {
     public void detach(ObserverDeCapteur observerCapteur);
     public int getValue();
     public void tick();
+
+    public void lock();
+
+    public void unlock();
 }

@@ -11,7 +11,7 @@ public class DiffusionAtomique implements AlgoDiffusion{
 
     @Override
     public void execute() {
-
+        this.capteur.
     }
 
     public Capteur getCapteur() {
