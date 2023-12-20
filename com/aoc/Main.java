@@ -8,14 +8,13 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        AlgoDiffusion alog = new DiffusionAtomique();
-        List<ObserverDeCapteurAsync> observerDeCapteurAsyncs = new ArrayList<>();
-        observerDeCapteurAsyncs.add(new Canal());
-        observerDeCapteurAsyncs.add(new Canal());
-        observerDeCapteurAsyncs.add(new Canal());
-        observerDeCapteurAsyncs.add(new Canal());
-        observerDeCapteurAsyncs.add(new Canal());
-        Capteur c = new CapteurImpl(observerDeCapteurAsyncs, alog);
+        AlgoDiffusion algo = new DiffusionAtomique();
+        List<ObserverDeCapteurAsync> observerDeCapteurAsyncs = new ArrayList<>();       //Ce sont les canaux qui
+                                                                                    // obserevent le capteur ?
+        for(int i=0; i<5; i++){
+            observerDeCapteurAsyncs.add(new Canal());
+        }
+        Capteur c = new CapteurImpl(observerDeCapteurAsyncs, algo);
         c.tick();
     }
 }

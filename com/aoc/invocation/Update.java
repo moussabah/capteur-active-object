@@ -9,7 +9,7 @@ import java.util.concurrent.Callable;
 public class Update implements Callable<Void> {
 
 
-    // Create Servent
+    // Create Servant
     private ObserverDeCapteur afficheur = new Afficheur();
     private Capteur  capteur;
 

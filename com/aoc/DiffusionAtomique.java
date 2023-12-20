@@ -9,6 +9,11 @@ public class DiffusionAtomique implements AlgoDiffusion{
     private Capteur capteur;
     private List<ObserverDeCapteurAsync> observerDeCapteurAsyncs;
 
+    /**
+     *
+     * @param capteur
+     * @param observerDeCapteurAsyncs
+     */
     @Override
     public void configure(Capteur capteur, List<ObserverDeCapteurAsync> observerDeCapteurAsyncs) {
         this.capteur = capteur;
@@ -24,8 +29,11 @@ public class DiffusionAtomique implements AlgoDiffusion{
         this.capteur.unlock();
     }
 
+    /**
+     * @return Capteur
+     */
     public Capteur getCapteur() {
-        return capteur;
+        return this.capteur;
     }
 
     public void setCapteur(Capteur capteur) {
