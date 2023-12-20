@@ -1,5 +1,5 @@
 package com.aoc;
 
 public interface ObserverDeCapteur {
-    public void update(Capteur capteur);
+    public void update(Capteur capteurAsync);
 }

@@ -1,4 +1,6 @@
-package com.aoc;
+package com.aoc.StrategyAlgo;
+
+import com.aoc.AlgoDiffusion;
 
 public class DiffusionParEpoque implements AlgoDiffusion {
 
