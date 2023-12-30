@@ -7,7 +7,7 @@ import java.util.List;
 public class DiffusionAtomique implements AlgoDiffusion{
 
     private Capteur capteur;
-    private List<ObserverDeCapteurAsync> observerDeCapteurAsyncs;
+    private List<ObserverDeCapteurAsync> proxies;
 
     /**
      *
@@ -15,16 +15,16 @@ public class DiffusionAtomique implements AlgoDiffusion{
      * @param observerDeCapteurAsyncs
      */
     @Override
-    public void configure(Capteur capteur, List<ObserverDeCapteurAsync> observerDeCapteurAsyncs) {
+    public void configure(Capteur capteur, List<ObserverDeCapteurAsync> proxies) {
         this.capteur = capteur;
-        this.observerDeCapteurAsyncs = observerDeCapteurAsyncs;
+        this.proxies = proxies;
     }
 
     @Override
     public void execute() {
         this.capteur.lock();
-        this.observerDeCapteurAsyncs.forEach(observer -> {
-            observer.update(this.capteur);
+        this.proxies.forEach(proxy -> {
+            proxy.update(this.capteur);
         });
         this.capteur.unlock();
     }
