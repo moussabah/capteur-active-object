@@ -24,11 +24,10 @@ public class Canal implements ObserverDeCapteurAsync {
 
     @Override
     public Future<GetValue> getValue() {
-        ExecutorService ex = Executors.newFixedThreadPool(1);
         int capteurValue = this.algoDiffusion.getValue();
         GetValue value = new GetValue();
         value.setValue(capteurValue);
-        return ex.submit(() -> value);
+        return this.scheduler.submit(() -> value);
     }
 
 

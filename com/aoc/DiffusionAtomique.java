@@ -10,9 +10,6 @@ public class DiffusionAtomique implements AlgoDiffusion{
 
     private Capteur capteur;
     private List<ObserverDeCapteurAsync> proxies;
-
-    private ExecutorService executorService = Executors.newFixedThreadPool(1);
-
     private GetValue capteurValue = new GetValue();
     @Override
     public void configure(Capteur capteur, List<ObserverDeCapteurAsync> proxies) {
