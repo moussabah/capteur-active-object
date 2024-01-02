@@ -9,11 +9,11 @@ import java.util.concurrent.*;
 public class Canal implements ObserverDeCapteurAsync {
 
     private AlgoDiffusion algoDiffusion;
-    public Canal(AlgoDiffusion algoDiffusion){
+    private ExecutorService scheduler;
+    public Canal(AlgoDiffusion algoDiffusion, ExecutorService executorService){
+        this.scheduler = executorService;
         this.algoDiffusion = algoDiffusion;
     }
-
-    ExecutorService scheduler = Executors.newFixedThreadPool(1);
     @Override
     public Future<Void> update(ObserverDeCapteurAsync observerDeCapteurAsync) {
         // Create Method Invocation
