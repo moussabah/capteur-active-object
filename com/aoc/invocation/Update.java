@@ -1,6 +1,6 @@
 package com.aoc.invocation;
 
-import com.aoc.Capteur;
+import com.aoc.proxy.ObserverDeCapteurAsync;
 import com.aoc.servent.Afficheur;
 import com.aoc.servent.ObserverDeCapteur;
 
@@ -8,20 +8,21 @@ import java.util.concurrent.Callable;
 
 public class Update implements Callable<Void> {
 
+    public static int counter = 0;
 
-    // Create Servant
-    private ObserverDeCapteur afficheur = new Afficheur();
-    private Capteur  capteur;
+    // Create Servent
+    private final ObserverDeCapteur afficheur;
+    private final ObserverDeCapteurAsync  observerDeCapteurAsync;
 
-
-    // proxy or Client on param ?
-    public Update(Capteur capteur){
-        this.capteur = capteur;
+    public Update(ObserverDeCapteurAsync observerDeCapteurAsync){
+        Update.counter++;
+        this.afficheur = new Afficheur("A"+Update.counter);
+        this.observerDeCapteurAsync = observerDeCapteurAsync;
     }
 
     @Override
-    public Void call() throws Exception {
-        this.capteur.getValue();
+    public Void call() {
+        afficheur.update(this.observerDeCapteurAsync);
         return null;
     }
 }
