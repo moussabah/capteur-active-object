@@ -8,8 +8,8 @@ import java.util.concurrent.*;
 
 public class Canal implements ObserverDeCapteurAsync {
 
-    private AlgoDiffusion algoDiffusion;
-    private ExecutorService scheduler;
+    private final AlgoDiffusion algoDiffusion;
+    private final ExecutorService scheduler;
     public Canal(AlgoDiffusion algoDiffusion, ExecutorService executorService){
         this.scheduler = executorService;
         this.algoDiffusion = algoDiffusion;
@@ -24,10 +24,11 @@ public class Canal implements ObserverDeCapteurAsync {
 
     @Override
     public Future<GetValue> getValue() {
+        ExecutorService ex = Executors.newFixedThreadPool(1);
         int capteurValue = this.algoDiffusion.getValue();
         GetValue value = new GetValue();
         value.setValue(capteurValue);
-        return this.scheduler.submit(() -> value);
+        return ex.submit(() -> value);
     }
 
 

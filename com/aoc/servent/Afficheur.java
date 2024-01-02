@@ -16,7 +16,6 @@ public class Afficheur implements ObserverDeCapteur {
 
     @Override
     public void update(ObserverDeCapteurAsync observerDeCapteurAsync) {
-        System.out.println(this.getName());
         Future<GetValue> valueAsync = observerDeCapteurAsync.getValue();
         while (!valueAsync.isDone()) {}
         try {
