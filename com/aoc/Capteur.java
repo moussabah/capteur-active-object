@@ -11,4 +11,6 @@ public interface Capteur {
     public void lock();
 
     public void unlock();
+
+    void setValue(int i);
 }

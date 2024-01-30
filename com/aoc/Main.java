@@ -22,5 +22,6 @@ public class Main {
         }
         Capteur c = new CapteurImpl(observerDeCapteurAsyncs, alog);
         c.tick();
+        c.tick();
     }
 }

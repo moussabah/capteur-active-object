@@ -5,6 +5,9 @@ import com.aoc.proxy.ObserverDeCapteurAsync;
 
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+import java.util.logging.Logger;
 
 public class Afficheur implements ObserverDeCapteur {
 
@@ -16,13 +19,8 @@ public class Afficheur implements ObserverDeCapteur {
 
     @Override
     public void update(ObserverDeCapteurAsync observerDeCapteurAsync) {
-        Future<GetValue> valueAsync = observerDeCapteurAsync.getValue();
-        while (!valueAsync.isDone()) {}
-        try {
-            System.out.printf("%s = %d\n", this.name, valueAsync.get().getValue());
-        } catch (InterruptedException | ExecutionException e) {
-            System.err.println(e.getMessage());
-        }
+        GetValue valueAsync = observerDeCapteurAsync.getValue();
+        System.out.printf("%s ("+Thread.currentThread().getName()+") = %d\n", this.name, valueAsync.getValue());
     }
 
     @Override

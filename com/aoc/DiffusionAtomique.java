@@ -2,15 +2,20 @@ package com.aoc;
 
 import com.aoc.proxy.ObserverDeCapteurAsync;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.logging.Logger;
 
 public class DiffusionAtomique implements AlgoDiffusion{
 
     private Capteur capteur;
+    int counter = 0;
     private List<ObserverDeCapteurAsync> proxies;
-    private GetValue capteurValue = new GetValue();
+
+    private List<Future<Void>> results = new ArrayList<>();
     @Override
     public void configure(Capteur capteur, List<ObserverDeCapteurAsync> proxies) {
         this.capteur = capteur;
@@ -20,11 +25,14 @@ public class DiffusionAtomique implements AlgoDiffusion{
     @Override
     public void execute() {
         this.capteur.lock();
-        this.capteurValue.setValue(this.capteur.getValue());
         this.proxies.forEach(proxy -> {
-            proxy.update(proxy);
+            this.results.add(proxy.update(proxy));
         });
-        //this.capteur.unlock();
+        for (Future<Void> res : results){
+            while (!res.isDone()){}
+        }
+        this.results.clear();
+        this.capteur.unlock();
     }
 
     @Override

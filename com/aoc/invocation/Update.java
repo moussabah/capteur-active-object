@@ -22,6 +22,7 @@ public class Update implements Callable<Void> {
 
     @Override
     public Void call() {
+        System.out.println("call: "+afficheur.getName());
         afficheur.update(this.observerDeCapteurAsync);
         return null;
     }

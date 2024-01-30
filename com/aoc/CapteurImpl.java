@@ -4,6 +4,7 @@ import com.aoc.proxy.ObserverDeCapteurAsync;
 import com.aoc.servent.ObserverDeCapteur;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 public class CapteurImpl implements  Capteur{
     private AlgoDiffusion algoDiffusion;
@@ -31,6 +32,11 @@ public class CapteurImpl implements  Capteur{
     }
 
     @Override
+    public void setValue(int i) {
+        this.value = i;
+    }
+
+    @Override
     public void attach(ObserverDeCapteur observerCapteur) {
 
     }
@@ -49,8 +55,8 @@ public class CapteurImpl implements  Capteur{
     public void tick() {
         if (!this.lock){
             this.value++;
+            algoDiffusion.execute();
         }
-        algoDiffusion.execute();
     }
 
 }

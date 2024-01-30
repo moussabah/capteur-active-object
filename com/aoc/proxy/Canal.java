@@ -5,6 +5,7 @@ import com.aoc.GetValue;
 import com.aoc.invocation.Update;
 
 import java.util.concurrent.*;
+import java.util.logging.Logger;
 
 public class Canal implements ObserverDeCapteurAsync {
 
@@ -17,17 +18,16 @@ public class Canal implements ObserverDeCapteurAsync {
     @Override
     public Future<Void> update(ObserverDeCapteurAsync observerDeCapteurAsync) {
         // Create Method Invocation
-        Callable<Void>  update = new Update(observerDeCapteurAsync);
-        // Enqueue in scheduler
+        Callable<Void>  update = new Update(this);
         return scheduler.submit(update);
     }
 
     @Override
-    public Future<GetValue> getValue() {
+    public GetValue getValue() {
         int capteurValue = this.algoDiffusion.getValue();
         GetValue value = new GetValue();
         value.setValue(capteurValue);
-        return this.scheduler.submit(() -> value);
+        return value;
     }
 
 
