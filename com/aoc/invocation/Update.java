@@ -11,19 +11,18 @@ public class Update implements Callable<Void> {
     public static int counter = 0;
 
     // Create Servent
-    private final ObserverDeCapteur afficheur;
     private final ObserverDeCapteurAsync  observerDeCapteurAsync;
+    private final ObserverDeCapteur  observerDeCapteur;
 
-    public Update(ObserverDeCapteurAsync observerDeCapteurAsync){
+    public Update(ObserverDeCapteurAsync observerDeCapteurAsync, ObserverDeCapteur observerDeCapteur){
         Update.counter++;
-        this.afficheur = new Afficheur("A"+Update.counter);
         this.observerDeCapteurAsync = observerDeCapteurAsync;
+        this.observerDeCapteur = observerDeCapteur;
     }
 
     @Override
     public Void call() {
-        System.out.println("call: "+afficheur.getName());
-        afficheur.update(this.observerDeCapteurAsync);
+        observerDeCapteur.update(this.observerDeCapteurAsync);
         return null;
     }
 }
