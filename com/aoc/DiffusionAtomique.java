@@ -24,7 +24,7 @@ public class DiffusionAtomique implements AlgoDiffusion{
 
     @Override
     public void execute() {
-        this.capteur.lock();
+        this.capteur.increment();
         this.proxies.forEach(proxy -> {
             this.results.add(proxy.update(proxy));
         });
@@ -32,7 +32,6 @@ public class DiffusionAtomique implements AlgoDiffusion{
             while (!res.isDone()){}
         }
         this.results.clear();
-        this.capteur.unlock();
     }
 
     @Override

@@ -12,5 +12,7 @@ public interface Capteur {
 
     public void unlock();
 
+    void increment();
+
     void setValue(int i);
 }

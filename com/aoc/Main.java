@@ -13,7 +13,7 @@ public class Main {
 
         final int nbThreads = 5;
 
-        ExecutorService executorService = Executors.newFixedThreadPool(nbThreads);
+        ExecutorService executorService = Executors.newFixedThreadPool(5);
 
         AlgoDiffusion alog = new DiffusionAtomique();
         List<ObserverDeCapteurAsync> observerDeCapteurAsyncs = new ArrayList<>();

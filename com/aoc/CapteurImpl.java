@@ -32,6 +32,11 @@ public class CapteurImpl implements  Capteur{
     }
 
     @Override
+    public void increment() {
+        this.value++;
+    }
+
+    @Override
     public void setValue(int i) {
         this.value = i;
     }
@@ -53,10 +58,7 @@ public class CapteurImpl implements  Capteur{
 
     @Override
     public void tick() {
-        if (!this.lock){
-            this.value++;
-            algoDiffusion.execute();
-        }
+        algoDiffusion.execute();
     }
 
 }
