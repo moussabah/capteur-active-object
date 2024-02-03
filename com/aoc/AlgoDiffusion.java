@@ -13,4 +13,6 @@ public interface AlgoDiffusion {
     public int getValue();
 
     Scheduler getScheduler();
+
+    public void setNbPool(int pool);
 }

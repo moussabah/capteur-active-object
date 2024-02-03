@@ -6,11 +6,7 @@ import com.aoc.scheduler.SchedulerImpl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.logging.Logger;
 
 public class DiffusionAtomique implements AlgoDiffusion{
 
@@ -19,6 +15,9 @@ public class DiffusionAtomique implements AlgoDiffusion{
     private List<ObserverDeCapteurAsync> proxies;
 
     private List<Future<Void>> results = new ArrayList<>();
+
+    private int nbPool = 1;
+
     @Override
     public void configure(Capteur capteur, List<ObserverDeCapteurAsync> proxies) {
         this.capteur = capteur;
@@ -44,6 +43,11 @@ public class DiffusionAtomique implements AlgoDiffusion{
 
     @Override
     public Scheduler getScheduler() {
-        return new SchedulerImpl(5);
+        return new SchedulerImpl(this.nbPool);
+    }
+
+    @Override
+    public void setNbPool(int pool) {
+        this.nbPool = pool;
     }
 }
