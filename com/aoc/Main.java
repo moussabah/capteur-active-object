@@ -15,15 +15,14 @@ public class Main {
 
         final int nbThreads = 5;
 
-        ExecutorService executorService = Executors.newFixedThreadPool(10);
-
         AlgoDiffusion alog = new DiffusionSequentielle();
-        List<ObserverDeCapteurAsync> observerDeCapteurAsyncs = new ArrayList<>();
+        List<ObserverDeCapteur> afficheurs = new ArrayList<>();
         for (int i = 0; i < nbThreads; i++) {
-            ObserverDeCapteur observerDeCapteur = new Afficheur("A"+i);
-            observerDeCapteurAsyncs.add(new Canal(alog, observerDeCapteur, executorService));
+            afficheurs.add(new Afficheur("A"+i));
         }
-        Capteur c = new CapteurImpl(observerDeCapteurAsyncs, alog);
+        Capteur c = new CapteurImpl(afficheurs, alog);
         c.tick();
+        c.tick();
+
     }
 }

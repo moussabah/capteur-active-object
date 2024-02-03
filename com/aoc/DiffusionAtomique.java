@@ -1,12 +1,15 @@
 package com.aoc;
 
 import com.aoc.proxy.ObserverDeCapteurAsync;
+import com.aoc.scheduler.Scheduler;
+import com.aoc.scheduler.SchedulerImpl;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.logging.Logger;
 
 public class DiffusionAtomique implements AlgoDiffusion{
@@ -37,6 +40,11 @@ public class DiffusionAtomique implements AlgoDiffusion{
     @Override
     public int getValue() {
         return this.capteur.getValue();
+    }
+
+    @Override
+    public Scheduler getScheduler() {
+        return new SchedulerImpl(5);
     }
 
     public Capteur getCapteur() {

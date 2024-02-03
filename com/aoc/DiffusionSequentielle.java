@@ -1,6 +1,8 @@
 package com.aoc;
 
 import com.aoc.proxy.ObserverDeCapteurAsync;
+import com.aoc.scheduler.Scheduler;
+import com.aoc.scheduler.SchedulerImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,5 +45,10 @@ public class DiffusionSequentielle implements AlgoDiffusion{
     @Override
     public int getValue() {
         return this.value;
+    }
+
+    @Override
+    public Scheduler getScheduler() {
+        return new SchedulerImpl(5);
     }
 }

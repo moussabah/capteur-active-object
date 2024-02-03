@@ -7,12 +7,12 @@ public class SchedulerImpl implements Scheduler {
     ScheduledExecutorService executorService;
     private int delay = 0;
 
-    SchedulerImpl(ScheduledExecutorService scheduler){
-        this.executorService = scheduler;
+    public SchedulerImpl(int nbPool){
+        this.executorService = Executors.newScheduledThreadPool(nbPool);
     }
 
     @Override
-    public Future<Integer> enqueue(Callable<Integer> callable) {
+    public Future<Void> enqueue(Callable<Void> callable) {
         return this.executorService.schedule(callable, this.delay, TimeUnit.SECONDS);
     }
 
