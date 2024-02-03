@@ -9,14 +9,13 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) throws InterruptedException {
 
-        final int nbThreads = 5;
+        final int nbObservers = 5;
 
-        AlgoDiffusion alog = new DiffusionSequentielle();
         List<ObserverDeCapteur> afficheurs = new ArrayList<>();
-        for (int i = 0; i < nbThreads; i++) {
+        for (int i = 0; i < nbObservers; i++) {
             afficheurs.add(new Afficheur("A" + i));
         }
-        Capteur c = new CapteurImpl(afficheurs, alog);
+        Capteur c = new CapteurImpl(afficheurs, new DiffusionSequentielle());
         c.tick();
         c.tick();
 
