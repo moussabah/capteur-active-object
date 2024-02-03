@@ -5,4 +5,5 @@ import java.util.concurrent.Future;
 
 public interface Scheduler {
     public Future<Integer> enqueue(Callable<Integer> callable);
+    public void setDelay(int delay);
 }

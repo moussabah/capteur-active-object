@@ -1,20 +1,23 @@
 package com.aoc.scheduler;
 
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 
 public class SchedulerImpl implements Scheduler {
 
-    ExecutorService executorService;
+    ScheduledExecutorService executorService;
+    private int delay = 0;
 
-    SchedulerImpl(){
-        this.executorService = Executors.newFixedThreadPool(1);
+    SchedulerImpl(ScheduledExecutorService scheduler){
+        this.executorService = scheduler;
     }
 
     @Override
     public Future<Integer> enqueue(Callable<Integer> callable) {
-        return this.executorService.submit(callable);
+        return this.executorService.schedule(callable, this.delay, TimeUnit.SECONDS);
+    }
+
+    @Override
+    public void setDelay(int delay) {
+        this.delay = delay;
     }
 }
