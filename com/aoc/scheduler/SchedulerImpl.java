@@ -5,7 +5,7 @@ import java.util.concurrent.*;
 public class SchedulerImpl implements Scheduler {
 
     ScheduledExecutorService executorService;
-    private int delay = 0;
+    private long delay = 0L;
 
     public SchedulerImpl(int nbPool){
         this.executorService = Executors.newScheduledThreadPool(nbPool);
@@ -17,7 +17,7 @@ public class SchedulerImpl implements Scheduler {
     }
 
     @Override
-    public void setDelay(int delay) {
+    public void setDelay(long delay) {
         this.delay = delay;
     }
 }
