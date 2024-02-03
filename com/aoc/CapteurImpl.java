@@ -3,13 +3,10 @@ package com.aoc;
 import com.aoc.proxy.Canal;
 import com.aoc.proxy.ObserverDeCapteurAsync;
 import com.aoc.scheduler.Scheduler;
-import com.aoc.servent.Afficheur;
 import com.aoc.servent.ObserverDeCapteur;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.logging.Logger;
 
 public class CapteurImpl implements  Capteur{
     private final AlgoDiffusion algoDiffusion;

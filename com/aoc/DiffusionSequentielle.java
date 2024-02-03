@@ -7,7 +7,6 @@ import com.aoc.scheduler.SchedulerImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Future;
-import java.util.logging.Logger;
 
 public class DiffusionSequentielle implements AlgoDiffusion{
 

@@ -7,7 +7,6 @@ import com.aoc.scheduler.Scheduler;
 import com.aoc.servent.ObserverDeCapteur;
 
 import java.util.concurrent.*;
-import java.util.logging.Logger;
 
 public class Canal implements ObserverDeCapteurAsync {
 
