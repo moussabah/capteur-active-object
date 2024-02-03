@@ -46,12 +46,4 @@ public class DiffusionAtomique implements AlgoDiffusion{
     public Scheduler getScheduler() {
         return new SchedulerImpl(5);
     }
-
-    public Capteur getCapteur() {
-        return capteur;
-    }
-
-    public void setCapteur(Capteur capteur) {
-        this.capteur = capteur;
-    }
 }
