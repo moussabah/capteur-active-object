@@ -25,7 +25,6 @@ public class AlgoTest {
     @Test
     void diffusionAtomicTest(){
         AlgoDiffusion atomicDiffusion =  new DiffusionAtomique();
-        Scheduler scheduler = atomicDiffusion.getScheduler();
         capteur = new CapteurImpl(afficheurs, atomicDiffusion);
         capteur.tick();
         capteur.tick();
@@ -47,6 +46,7 @@ public class AlgoTest {
                 System.out.println("Test...");
                 assertTrue(observerDeCapteur.getValues().contains(afficheur.getValues()));
             }
+            else break;
         }
 
     }
