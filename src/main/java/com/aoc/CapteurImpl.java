@@ -16,8 +16,6 @@ public class CapteurImpl implements  Capteur{
 
     private int value = 0;
 
-    private boolean lock = false;
-
     public CapteurImpl(List<ObserverDeCapteur> observerDeCapteurs, AlgoDiffusion algoDiffusion){
         this.observerDeCapteurs = observerDeCapteurs;
         this.algoDiffusion = algoDiffusion;
@@ -33,34 +31,10 @@ public class CapteurImpl implements  Capteur{
     }
 
     @Override
-    public void lock(){
-        this.lock = true;
-    }
-
-    @Override
-    public void unlock(){
-        this.lock = false;
-    }
-
-    @Override
     public void increment() {
         this.value++;
     }
 
-    @Override
-    public void setValue(int i) {
-        this.value = i;
-    }
-
-    @Override
-    public void attach(ObserverDeCapteur observerCapteur) {
-
-    }
-
-    @Override
-    public void detach(ObserverDeCapteur observerCapteur) {
-
-    }
 
     @Override
     public int getValue() {
