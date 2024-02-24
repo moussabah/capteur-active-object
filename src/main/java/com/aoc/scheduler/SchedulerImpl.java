@@ -20,4 +20,11 @@ public class SchedulerImpl implements Scheduler {
     public void setDelay(long delay) {
         this.delay = delay;
     }
+
+    @Override
+    public boolean isTerminated() {
+        return this.executorService.isTerminated();
+    }
+
+
 }
