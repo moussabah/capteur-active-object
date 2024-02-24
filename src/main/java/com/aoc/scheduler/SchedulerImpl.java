@@ -21,10 +21,5 @@ public class SchedulerImpl implements Scheduler {
         this.delay = delay;
     }
 
-    @Override
-    public boolean isTerminated() {
-        return this.executorService.isTerminated();
-    }
-
 
 }

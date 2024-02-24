@@ -56,4 +56,14 @@ public class DiffusionSequentielle implements AlgoDiffusion{
     public void setNbPool(int pool) {
         this.nbPool = pool;
     }
+
+    @Override
+    public boolean isTerminated() {
+        for (Future<Void> f : futures){
+            if (!f.isDone()){
+                return false;
+            }
+        }
+        return true;
+    }
 }

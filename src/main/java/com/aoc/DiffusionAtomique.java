@@ -50,4 +50,9 @@ public class DiffusionAtomique implements AlgoDiffusion{
     public void setNbPool(int pool) {
         this.nbPool = pool;
     }
+
+    @Override
+    public boolean isTerminated() {
+        return this.results.isEmpty();
+    }
 }

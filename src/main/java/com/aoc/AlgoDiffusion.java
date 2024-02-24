@@ -15,4 +15,6 @@ public interface AlgoDiffusion {
     Scheduler getScheduler();
 
     public void setNbPool(int pool);
+
+    public boolean isTerminated();
 }

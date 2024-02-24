@@ -6,6 +6,4 @@ import java.util.concurrent.Future;
 public interface Scheduler {
     public Future<Void> enqueue(Callable<Void> callable);
     public void setDelay(long delay);
-
-    public boolean isTerminated();
 }
