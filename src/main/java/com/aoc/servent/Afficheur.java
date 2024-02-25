@@ -15,6 +15,8 @@ public class Afficheur implements ObserverDeCapteur {
 
     private final String name;
 
+    private int currentValue;
+
     List<Integer> values = new ArrayList<>();
 
     public Afficheur(String name) {
@@ -24,6 +26,7 @@ public class Afficheur implements ObserverDeCapteur {
     @Override
     public void update(ObserverDeCapteurAsync observerDeCapteurAsync) {
         GetValue valueAsync = observerDeCapteurAsync.getValue();
+        this.currentValue = valueAsync.getValue();
         System.out.printf("%s ("+Thread.currentThread().getName()+") = %d\n", this.name, valueAsync.getValue());
         values.add(valueAsync.getValue());
     }
@@ -45,5 +48,11 @@ public class Afficheur implements ObserverDeCapteur {
         return valuesToString.toString();
     }
 
+    public int getCurrentValue() {
+        return currentValue;
+    }
 
+    public void setCurrentValue(int currentValue) {
+        this.currentValue = currentValue;
+    }
 }

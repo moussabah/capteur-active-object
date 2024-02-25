@@ -1,7 +1,9 @@
 package com.aoc;
 
 import com.aoc.proxy.ObserverDeCapteurAsync;
+import com.aoc.servent.ObserverDeCapteur;
 
+import javax.swing.plaf.FontUIResource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Future;
@@ -39,6 +41,21 @@ public class DiffusionAtomique implements AlgoDiffusion{
 
     @Override
     public boolean isTerminated() {
-        return this.results.isEmpty();
+        for (Future<Void> future : this.results){
+            if (!future.isDone()){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public void attach(ObserverDeCapteurAsync observerDeCapteurAsync) {
+        this.proxies.add(observerDeCapteurAsync);
+    }
+
+    @Override
+    public boolean detach(ObserverDeCapteurAsync observerDeCapteurAsync) {
+        return this.proxies.remove(observerDeCapteurAsync);
     }
 }

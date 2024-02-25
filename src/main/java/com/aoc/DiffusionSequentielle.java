@@ -53,4 +53,14 @@ public class DiffusionSequentielle implements AlgoDiffusion{
         }
         return true;
     }
+
+    @Override
+    public void attach(ObserverDeCapteurAsync observerDeCapteurAsync) {
+        this.proxies.add(observerDeCapteurAsync);
+    }
+
+    @Override
+    public boolean detach(ObserverDeCapteurAsync observerDeCapteurAsync) {
+        return this.proxies.remove(observerDeCapteurAsync);
+    }
 }

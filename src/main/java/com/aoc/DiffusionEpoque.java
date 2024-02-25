@@ -25,4 +25,14 @@ public class DiffusionEpoque implements AlgoDiffusion{
     public boolean isTerminated() {
         return true;
     }
+
+    @Override
+    public void attach(ObserverDeCapteurAsync observerDeCapteurAsync) {
+
+    }
+
+    @Override
+    public boolean detach(ObserverDeCapteurAsync observerDeCapteurAsync) {
+        return false;
+    }
 }
