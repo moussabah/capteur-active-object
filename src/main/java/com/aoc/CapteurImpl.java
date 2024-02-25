@@ -2,7 +2,6 @@ package com.aoc;
 
 import com.aoc.proxy.Canal;
 import com.aoc.proxy.ObserverDeCapteurAsync;
-import com.aoc.scheduler.Scheduler;
 import com.aoc.servent.ObserverDeCapteur;
 
 import java.util.ArrayList;
@@ -24,9 +23,8 @@ public class CapteurImpl implements  Capteur{
     }
 
     private void initializeCanals(){
-        Scheduler scheduler = algoDiffusion.getScheduler();
         for (ObserverDeCapteur observerDeCapteur : observerDeCapteurs){
-            observerDeCapteurAsyncs.add(new Canal(algoDiffusion, observerDeCapteur, scheduler));
+            observerDeCapteurAsyncs.add(new Canal(algoDiffusion, observerDeCapteur));
         }
     }
 

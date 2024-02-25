@@ -1,12 +1,9 @@
 import com.aoc.*;
-import com.aoc.proxy.ObserverDeCapteurAsync;
-import com.aoc.scheduler.Scheduler;
 import com.aoc.servent.Afficheur;
 import com.aoc.servent.ObserverDeCapteur;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import javax.security.auth.login.AccountLockedException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +24,6 @@ public class AlgoTest {
     @Test
     void diffusionAtomicTest(){
         AlgoDiffusion atomicDiffusion =  new DiffusionAtomique();
-        Scheduler scheduler = atomicDiffusion.getScheduler();
         capteur = new CapteurImpl(afficheurs, atomicDiffusion);
         capteur.tick();
         capteur.tick();

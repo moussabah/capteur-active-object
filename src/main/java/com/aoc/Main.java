@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) {
 
         final int nbObservers = 5;
 
@@ -15,7 +15,7 @@ public class Main {
         for (int i = 0; i < nbObservers; i++) {
             afficheurs.add(new Afficheur("A" + i));
         }
-        Capteur c = new CapteurImpl(afficheurs, new DiffusionSequentielle());
+        Capteur c = new CapteurImpl(afficheurs, new DiffusionAtomique());
         c.tick();
         c.tick();
 

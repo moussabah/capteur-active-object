@@ -3,7 +3,6 @@ package com.aoc.proxy;
 import com.aoc.AlgoDiffusion;
 import com.aoc.GetValue;
 import com.aoc.invocation.Update;
-import com.aoc.scheduler.Scheduler;
 import com.aoc.servent.ObserverDeCapteur;
 
 import java.util.concurrent.*;
@@ -11,10 +10,10 @@ import java.util.concurrent.*;
 public class Canal implements ObserverDeCapteurAsync {
 
     private final AlgoDiffusion algoDiffusion;
-    private final Scheduler scheduler;
     private final ObserverDeCapteur observerDeCapteur;
-    public Canal(AlgoDiffusion algoDiffusion, ObserverDeCapteur observerDeCapteur, Scheduler scheduler){
-        this.scheduler = scheduler;
+
+    ExecutorService executorService = Executors.newScheduledThreadPool(1);
+    public Canal(AlgoDiffusion algoDiffusion, ObserverDeCapteur observerDeCapteur){
         this.algoDiffusion = algoDiffusion;
         this.observerDeCapteur = observerDeCapteur;
     }
@@ -22,7 +21,7 @@ public class Canal implements ObserverDeCapteurAsync {
     public Future<Void> update(ObserverDeCapteurAsync observerDeCapteurAsync) {
         // Create Method Invocation
         Callable<Void>  update = new Update(this, observerDeCapteur);
-        return scheduler.enqueue(update);
+        return executorService.submit(update);
     }
 
     @Override

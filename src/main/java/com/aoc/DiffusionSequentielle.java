@@ -1,8 +1,6 @@
 package com.aoc;
 
 import com.aoc.proxy.ObserverDeCapteurAsync;
-import com.aoc.scheduler.Scheduler;
-import com.aoc.scheduler.SchedulerImpl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +12,6 @@ public class DiffusionSequentielle implements AlgoDiffusion{
     private List<ObserverDeCapteurAsync> proxies;
     private int value;
     private List<Future<Void>> futures = new ArrayList<>();
-    private int nbPool = 1;
 
     @Override
     public void configure(Capteur capteur, List<ObserverDeCapteurAsync> observerDeCapteurAsyncs) {
@@ -45,16 +42,6 @@ public class DiffusionSequentielle implements AlgoDiffusion{
     @Override
     public int getValue() {
         return this.value;
-    }
-
-    @Override
-    public Scheduler getScheduler() {
-        return new SchedulerImpl(this.nbPool);
-    }
-
-    @Override
-    public void setNbPool(int pool) {
-        this.nbPool = pool;
     }
 
     @Override
