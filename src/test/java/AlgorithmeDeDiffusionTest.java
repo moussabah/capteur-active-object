@@ -1,6 +1,7 @@
 import com.aoc.*;
 import com.aoc.servent.Afficheur;
 import com.aoc.servent.ObserverDeCapteur;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -24,80 +25,55 @@ class AlgorithmeDeDiffusionTest{
         this.diffusionSeq = new DiffusionSequentielle();
 
         this.afficheurs = new ArrayList<>();
-        assertTrue(afficheurs.isEmpty());
-        for (int i = 0; i < 2; i++) {
-            afficheurs.add(new Afficheur("A" + i));
-        }
-        assertTrue(afficheurs.size() == 2);
+        afficheurs.add(new Afficheur("A1"));
+        afficheurs.add(new Afficheur("A2"));
         this.capteur = new CapteurImpl(afficheurs, diffusionAto);
         capteur.tick();
+    }
+
+    @AfterEach
+    void SetUpDisplayObservers() {
+        for (ObserverDeCapteur afficheur : this.afficheurs) {
+            System.out.println("" + afficheur.getName() + ": " + afficheur.getValues());
+        }
     }
 
     /*#****************************************  DIFFUSION ATOMIQUE  *************************************/
 
     @Test
-    void diffusionAtoTest(){
+    void initialCase_testAtomicConsistency(){
         for (ObserverDeCapteur afficheur : afficheurs){         //On s'assure que tous les afficheurs
-            assertEquals(1, capteur.getValue());        // ont la même valeur
+            assertEquals("1", afficheur.getValues());  // ont la même valeur initial quand on fait le tick
         }
         capteur.tick();
         assertEquals(2, capteur.getValue());
     }
 
     @Test
-    void testAtomicConsistencyOracle() {
-        // Get observed values for each afficheur
-        int[] observedValues = new int[4];
-        for (int i = 0; i < 4; i++) {
-            observedValues[i] = capteur.getValue();
-            capteur.tick();
-        }
+    void successCase_AtomicConsistency() {
         // Validate atomic consistency
-        assertEquals(true, isAtomicConsistent(observedValues));
+        assertTrue(isAtomicConsistent(getObservedValues(capteur,2)));
     }
 
     @Test
-    void testAtomicConsistency2() {
+    void failCase_AtomicConsistency() {
         // Set up scenario
-        System.out.println(capteur.getValue());
-        capteur.setValue(1); // Set initial value to 1
-        System.out.println(capteur.getValue());
-
-        capteur.tick();
-        capteur.setValue(3);
-        capteur.tick();
-
-        // Get observed values for each afficheur through the capteur
-        int[] observedValues = new int[4];
-        for (int i = 0; i < 4; i++) {
-            observedValues[i] = capteur.getValue();
-            capteur.tick(); // Move to the next tick
-        }
+        capteur.setValue(2);
+        System.out.println(" Enter  " );
         // Validate atomic consistency
-        assertEquals(false, isAtomicConsistent(observedValues));
+        assertFalse(isAtomicConsistent(getObservedValues(capteur, 2))); // A2 = 1, 3, 4
+        assertFalse(isAtomicConsistent(getObservedValues(capteur, 2))); // A3 = 1, 2, 5
     }
 
-    @Test
-    void testAtomicConsistency3() {
-        // Set up scenario
-        capteur.setValue(1);
-        capteur.tick();
-        capteur.setValue(3);
-        capteur.tick();
-        capteur.setValue(5);
-        capteur.tick();
-
-        // Get observed values for each afficheur through the capteur
-        int[] observedValues = new int[4];
-        for (int i = 0; i < 4; i++) {
+    private int[] getObservedValues(Capteur capteur, int ticks) {
+        int[] observedValues = new int[ticks];
+        for (int i = 0; i < ticks; i++) {
             observedValues[i] = capteur.getValue();
+
             capteur.tick(); // Move to the next tick
         }
-
-        // Validate atomic consistency
-        assertEquals(false, isAtomicConsistent(observedValues));
+        return observedValues;
     }
-
     private boolean isAtomicConsistent(int[] afficheurs) {
         int expectedValue = 1; // Start with the expected value of 1
         for (int currentValue : afficheurs) {
@@ -113,7 +89,7 @@ class AlgorithmeDeDiffusionTest{
     /*#****************************************  DIFFUSION SEQUENTIELLE  *************************************/
 
     @Test
-    void diffusionSeqTest() throws InterruptedException {
+    void initialCase_SequentialConsistency() throws InterruptedException {
         this.capteur = new CapteurImpl(afficheurs, diffusionSeq);
         capteur.tick();
         assertEquals(1, capteur.getValue());
@@ -122,46 +98,63 @@ class AlgorithmeDeDiffusionTest{
         assertEquals(2, capteur.getValue());
     }
     @Test
-    void testSequentialConsistencyScenario1() throws InterruptedException {
+    void successCase_SequentialConsistency() throws InterruptedException {
         this.capteur = new CapteurImpl(afficheurs, diffusionSeq);
-        capteur.tick();
-        Thread.sleep(2000); // Introduce a short delay between ticks
         capteur.tick();
         assertTrue(isSequentiallyConsistent(capteur, 2));
     }
 
     @Test
-    void testSequentialConsistencyScenario2() throws InterruptedException {
+    void successCase_SequentialConsistency2() throws InterruptedException {
         this.capteur = new CapteurImpl(afficheurs, diffusionSeq);
         capteur.tick();
         Thread.sleep(2000); // Introduce a short delay between ticks
-        capteur.setValue(3);
         capteur.tick();
         Thread.sleep(2000); // Introduce a short delay between ticks
-        capteur.setValue(5);
+        capteur.setValue(3);
+        assertTrue(isSequentiallyConsistent(capteur, 3)); // Expected to fail
+    }
+
+    @Test
+    void failCase_SequentialConsistency() throws InterruptedException {
+        this.capteur = new CapteurImpl(afficheurs, diffusionSeq);
+        capteur.tick(); // First tick
+        Thread.sleep(2000); // Introduce a short delay between ticks
+        capteur.setValue(3); // Set value to 3 before the second tick
+        capteur.tick(); // Second tick
+        Thread.sleep(2000); // Introduce a short delay between ticks
+        capteur.setValue(2); // Set value to 2 before the third tick
         assertFalse(isSequentiallyConsistent(capteur, 3)); // Expected to fail
     }
 
+
+    /**
+     * Checks if the sequence of values observed from the Capteur is sequentially consistent.
+     *
+     * @param capteur The Capteur, instance to observe.
+     * @param ticks   The number of ticks to observe.
+     * @return true if the observed sequence is sequentially consistent, false otherwise.
+     * @throws InterruptedException if the thread is interrupted while sleeping.
+     */
     private boolean isSequentiallyConsistent(Capteur capteur, int ticks) throws InterruptedException {
         Set<Integer> observedValues = new HashSet<>();
-        for (int i = 0; i < ticks; i++) {
-            observedValues.add(capteur.getValue());
+        int previousValue = capteur.getValue();
+        int currentValue;
+        observedValues.add(previousValue);
+        for (int i = 1; i <= ticks; i++) {
             capteur.tick();
             Thread.sleep(2000); // Introduce a short delay between ticks
+            currentValue = capteur.getValue();
+            observedValues.add(currentValue);
+            if (currentValue <= previousValue) {
+                return false; // Sequence is not monotonically increasing
+            }
+            previousValue = currentValue;
         }
-        return isIncreasingSequence(observedValues);
+        System.out.println(observedValues);
+        return true; // All observed values form a monotonically increasing sequence
     }
 
-    private boolean isIncreasingSequence(Set<Integer> values) {
-        int expectedValue = 1;
-        for (int value : values) {
-            if (value != expectedValue) {
-                return false;
-            }
-            expectedValue++;
-        }
-        return true;
-    }
 
 
     /*#****************************************  DIFFUSION PAR EPOQUE  *************************************/

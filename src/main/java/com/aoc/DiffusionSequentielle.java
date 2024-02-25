@@ -6,10 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Future;
 
-public class DiffusionSequentielle implements AlgoDiffusion{
+/**
+ * Atomic diffusion
+ * Use for atomic reading form proxy and afficheurs
+ */
+public class DiffusionSequentielle implements AlgoDiffusion {
 
     private Capteur capteur;
     private List<ObserverDeCapteurAsync> proxies;
+    // Use to copy captor value
     private int value;
     private List<Future<Void>> futures = new ArrayList<>();
 

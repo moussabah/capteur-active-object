@@ -1,7 +1,6 @@
 package com.aoc.invocation;
 
 import com.aoc.proxy.ObserverDeCapteurAsync;
-import com.aoc.servent.Afficheur;
 import com.aoc.servent.ObserverDeCapteur;
 
 import java.util.concurrent.Callable;

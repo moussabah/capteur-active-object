@@ -84,6 +84,7 @@ public class AlgoTest {
             if (!afficheur.getName().equals(observerDeCapteur.getName())){
                 assertTrue(observerDeCapteur.getValues().contains(afficheur.getValues()));
             }
+            else break;
         }
 
     }

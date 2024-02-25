@@ -6,6 +6,7 @@ import java.util.List;
 
 public class DiffusionEpoque implements AlgoDiffusion{
 
+
     @Override
     public void configure(Capteur capteur, List<ObserverDeCapteurAsync> observerDeCapteurAsyncs) {
 
@@ -36,3 +37,4 @@ public class DiffusionEpoque implements AlgoDiffusion{
         return false;
     }
 }
+

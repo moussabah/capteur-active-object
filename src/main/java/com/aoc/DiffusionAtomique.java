@@ -3,7 +3,6 @@ package com.aoc;
 import com.aoc.proxy.ObserverDeCapteurAsync;
 import com.aoc.servent.ObserverDeCapteur;
 
-import javax.swing.plaf.FontUIResource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Future;

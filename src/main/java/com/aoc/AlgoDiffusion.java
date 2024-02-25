@@ -4,17 +4,41 @@ import com.aoc.proxy.ObserverDeCapteurAsync;
 import com.aoc.servent.ObserverDeCapteur;
 
 import java.util.List;
-import java.util.concurrent.Future;
 
+/**
+ * Strategy interface
+ */
 public interface AlgoDiffusion {
-    public void configure(Capteur capteur, List<ObserverDeCapteurAsync> observerDeCapteurAsyncs);
-    public void execute();
 
-    public int getValue();
+    /**
+     * Use to define contexte
+     *
+     * @param capteur                   contexte
+     * @param observerDeCapteurAsyncs   canals
+     */
+    void configure(Capteur capteur, List<ObserverDeCapteurAsync> observerDeCapteurAsyncs);
 
+    /**
+     * invoked when captor tick() will invoke
+     */
+    void execute();
+
+    /**
+     *
+     * @return true if all future is done
+     */
     public boolean isTerminated();
 
+    /**
+     * attach new canal
+     * @param observerDeCapteurAsync
+     */
     public void attach(ObserverDeCapteurAsync observerDeCapteurAsync);
 
+    /**
+     * detach canal
+     * @param observerDeCapteurAsync
+     * @return true if observerDeCapteurAsync is detached
+     */
     boolean detach(ObserverDeCapteurAsync observerDeCapteurAsync);
 }
