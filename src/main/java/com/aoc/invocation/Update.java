@@ -8,20 +8,18 @@ import java.util.concurrent.Callable;
 
 public class Update implements Callable<Void> {
 
-    public static int counter = 0;
-
     // Create Servent
     private final ObserverDeCapteurAsync  observerDeCapteurAsync;
     private final ObserverDeCapteur  observerDeCapteur;
 
     public Update(ObserverDeCapteurAsync observerDeCapteurAsync, ObserverDeCapteur observerDeCapteur){
-        Update.counter++;
         this.observerDeCapteurAsync = observerDeCapteurAsync;
         this.observerDeCapteur = observerDeCapteur;
     }
 
     @Override
-    public Void call() {
+    public Void call() throws InterruptedException {
+        Thread.sleep(1500L);
         observerDeCapteur.update(this.observerDeCapteurAsync);
         return null;
     }
