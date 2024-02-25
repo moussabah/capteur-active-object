@@ -90,15 +90,17 @@ class AlgorithmeDeDiffusionTest{
     }
 
     private boolean isAtomicConsistent(List<ObserverDeCapteur> afficheurs) {
-        int expectedValue = 1; // Start with the expected value of 1
+        ; // Start with the expected value of 1
         ObserverDeCapteur previous = afficheurs.get(0);
         for (ObserverDeCapteur afficheur : afficheurs) {
+            int expectedValue = 1;
             if(! afficheur.getValues().contains(previous.getValues())){
                 return false;
             }
             String[] valuesStr = afficheur.getValues().split(",");
             for (String valueStr : valuesStr) {
                 int value = Integer.parseInt(valueStr);
+                System.out.println( "First syst Value: " + value + " expectedValue: " + expectedValue);
                 if (value != expectedValue) {
                     return false; // Atomic consistency violated
                 }
