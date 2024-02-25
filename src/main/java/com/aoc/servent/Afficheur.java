@@ -5,6 +5,7 @@ import com.aoc.proxy.ObserverDeCapteurAsync;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Classe représentant un afficheur qui implémente l'interface ObserverDeCapteur.
@@ -37,7 +38,7 @@ public class Afficheur implements ObserverDeCapteur {
     public void update(ObserverDeCapteurAsync observerDeCapteurAsync) {
         GetValue valueAsync = observerDeCapteurAsync.getValue();
         this.currentValue = valueAsync.getValue();
-        System.out.printf("%s ("+Thread.currentThread().getName()+") = %d\n", this.name, valueAsync.getValue());
+        Logger.getGlobal().info(this.name+ "("+Thread.currentThread().getName()+"): "+ valueAsync.getValue());
         values.add(valueAsync.getValue());
     }
 
