@@ -59,7 +59,6 @@ class AlgorithmeDeDiffusionTest{
     void failCase_AtomicConsistency() {
         // Set up scenario
         capteur.setValue(2);
-        System.out.println(" Enter  " );
         // Validate atomic consistency
         assertFalse(isAtomicConsistent(getObservedValues(capteur, 2))); // A2 = 1, 3, 4
         assertFalse(isAtomicConsistent(getObservedValues(capteur, 2))); // A3 = 1, 2, 5

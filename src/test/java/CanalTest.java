@@ -30,6 +30,6 @@ public class CanalTest {
     void update(){
         Future<Void> future = this.canal.update(canal);
         assertNotNull(future);
-    }
+    };
 
 }
