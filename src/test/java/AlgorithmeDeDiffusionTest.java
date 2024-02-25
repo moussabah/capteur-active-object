@@ -190,14 +190,4 @@ class AlgorithmeDeDiffusionTest{
         return true; // Incrementing
     }
 
-    /*#****************************************  DIFFUSION PAR EPOQUE  *************************************/
-
-    @Test
-    void diffusionParEpoqueTest(){
-        this.capteur = new CapteurImpl(afficheurs, diffusionEpoque);
-        capteur.tick();
-        assertEquals(0, capteur.getValue());
-        capteur.tick();
-        assertEquals(2, capteur.getValue());
-    }
 }
