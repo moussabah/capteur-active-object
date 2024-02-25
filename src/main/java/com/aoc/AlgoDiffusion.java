@@ -24,21 +24,27 @@ public interface AlgoDiffusion {
     void execute();
 
     /**
-     *
+     * use to know if all futures tasks is terminated
      * @return true if all future is done
      */
     public boolean isTerminated();
 
     /**
      * attach new canal
-     * @param observerDeCapteurAsync
+     * @param observerDeCapteurAsync canal
      */
     public void attach(ObserverDeCapteurAsync observerDeCapteurAsync);
 
     /**
      * detach canal
-     * @param observerDeCapteurAsync
+     * @param observerDeCapteurAsync canal
      * @return true if observerDeCapteurAsync is detached
      */
     boolean detach(ObserverDeCapteurAsync observerDeCapteurAsync);
+
+    /**
+     * Make copy of captor value
+     * @return copy of captor value that will depend on strategy type
+     */
+    int getValue();
 }

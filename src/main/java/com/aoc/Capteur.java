@@ -9,6 +9,7 @@ import com.aoc.servent.ObserverDeCapteur;
  */
 public interface Capteur {
     /**
+     * Get captor value
      * @return capteur current value
      */
     public int getValue();
@@ -23,17 +24,21 @@ public interface Capteur {
      */
     void increment();
 
+    /**
+     * set captor value
+     * @param i captor value
+     */
     void setValue(int i);
 
     /**
      * attach new proxy
-     * @param observerDeCapteurAsync
+     * @param observerDeCapteurAsync canal
      */
     void attach(ObserverDeCapteurAsync observerDeCapteurAsync);
 
     /**
      * Detach proxy
-     * @param observerDeCapteur
+     * @param observerDeCapteur canal
      */
     void detach(ObserverDeCapteurAsync observerDeCapteur);
 }

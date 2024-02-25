@@ -9,17 +9,17 @@ import java.util.concurrent.Future;
  */
 public interface ObserverDeCapteurAsync {
     /**
-     * Met à jour l'observateur de capteur de manière asynchrone.
+     * Update canals (or proxies) value
      *
-     * @param observerDeCapteurAsync L'objet ObserverDeCapteurAsync à mettre à jour.
-     * @return Un Future<Void> représentant l'état de la mise à jour.
+     * @param observerDeCapteurAsync self canal
+     * @return future after enqueue task on scheduler (ExecutorService)
      */
     Future<Void> update(ObserverDeCapteurAsync observerDeCapteurAsync);
 
     /**
-     * Récupère la valeur du capteur.
+     * Return captor wrapped value
      *
-     * @return Un objet GetValue contenant la valeur du capteur.
+     * @return wrapped captor value
      */
     GetValue getValue();
 }

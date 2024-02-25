@@ -7,6 +7,9 @@ import com.aoc.servent.ObserverDeCapteur;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Captor implementation
+ */
 public class CapteurImpl implements  Capteur{
     /**
      * Strategy algorithm
@@ -23,9 +26,9 @@ public class CapteurImpl implements  Capteur{
 
     private int value = 0;
     /**
-     *
-     * @param observerDeCapteurs La liste des observateurs de capteur associés au capteur.
-     * @param algoDiffusion      L'algorithme de diffusion à utiliser pour le capteur.
+     * Captor constructor that create automatically canals form with observer given
+     * @param observerDeCapteurs observers
+     * @param algoDiffusion      algorithm strategy
      */
     public CapteurImpl(List<ObserverDeCapteur> observerDeCapteurs, AlgoDiffusion algoDiffusion){
         this.observerDeCapteurs = observerDeCapteurs;
@@ -34,6 +37,10 @@ public class CapteurImpl implements  Capteur{
         this.algoDiffusion.configure(this, this.observerDeCapteurAsyncs);
     }
 
+    /**
+     * Constructor with only diffusion algorithm
+     * @param algoDiffusion algorithm strategy
+     */
     public CapteurImpl(AlgoDiffusion algoDiffusion){
         this.algoDiffusion = algoDiffusion;
         this.algoDiffusion.configure(this, this.observerDeCapteurAsyncs);
@@ -63,7 +70,7 @@ public class CapteurImpl implements  Capteur{
 
     /**
      * Attach proxy that is ObserverDeCapteurAsync
-     * @param observerDeCapteurAsync
+     * @param observerDeCapteurAsync canals
      */
     @Override
     public void attach(ObserverDeCapteurAsync observerDeCapteurAsync) {
@@ -72,7 +79,7 @@ public class CapteurImpl implements  Capteur{
 
     /**
      * Detach proxy
-     * @param observerDeCapteur
+     * @param observerDeCapteur observer
      */
     @Override
     public void detach(ObserverDeCapteurAsync observerDeCapteur) {

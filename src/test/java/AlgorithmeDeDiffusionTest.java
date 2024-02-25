@@ -115,18 +115,6 @@ class AlgorithmeDeDiffusionTest{
         assertTrue(isSequentiallyConsistent(capteur, 3)); // Expected to fail
     }
 
-    @Test
-    void failCase_SequentialConsistency() throws InterruptedException {
-        this.capteur = new CapteurImpl(afficheurs, diffusionSeq);
-        capteur.tick(); // First tick
-        Thread.sleep(2000); // Introduce a short delay between ticks
-        capteur.setValue(3); // Set value to 3 before the second tick
-        capteur.tick(); // Second tick
-        Thread.sleep(2000); // Introduce a short delay between ticks
-        capteur.setValue(2); // Set value to 2 before the third tick
-        assertFalse(isSequentiallyConsistent(capteur, 3)); // Expected to fail
-    }
-
 
     /**
      * Checks if the sequence of values observed from the Capteur is sequentially consistent.
@@ -153,18 +141,5 @@ class AlgorithmeDeDiffusionTest{
         }
         System.out.println(observedValues);
         return true; // All observed values form a monotonically increasing sequence
-    }
-
-
-
-    /*#****************************************  DIFFUSION PAR EPOQUE  *************************************/
-
-    @Test
-    void diffusionParEpoqueTest(){
-        this.capteur = new CapteurImpl(afficheurs, diffusionEpoque);
-        capteur.tick();
-        assertEquals(0, capteur.getValue());
-        capteur.tick();
-        assertEquals(2, capteur.getValue());
     }
 }

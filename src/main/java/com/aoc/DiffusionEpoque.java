@@ -4,6 +4,9 @@ import com.aoc.proxy.ObserverDeCapteurAsync;
 
 import java.util.List;
 
+/**
+ * Epoque diffusion strategy
+ */
 public class DiffusionEpoque implements AlgoDiffusion{
 
 

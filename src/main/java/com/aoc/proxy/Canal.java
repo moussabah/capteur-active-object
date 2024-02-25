@@ -25,11 +25,10 @@ public class Canal implements ObserverDeCapteurAsync {
 
     ExecutorService executorService = Executors.newScheduledThreadPool(1);
     /**
-     * Construit une instance de Canal avec l'AlgoDiffusion, l'ObserverDeCapteur et le Scheduler donnés.
+     * Canal constructor
      *
-     * @param algoDiffusion    L'algorithme de diffusion à utiliser.
-     * @param observerDeCapteur L'observateur de capteur à associer au canal.
-     * @param scheduler        Le planificateur à utiliser pour l'ordonnancement.
+     * @param algoDiffusion    strategy diffusion
+     * @param observerDeCapteur observer that canal interacts with
      */
     public Canal(AlgoDiffusion algoDiffusion, ObserverDeCapteur observerDeCapteur){
         this.algoDiffusion = algoDiffusion;
@@ -37,10 +36,10 @@ public class Canal implements ObserverDeCapteurAsync {
     }
 
     /**
-     * Met à jour l'ObserverDeCapteurAsync en créant une tâche d'update et en l'ordonnant avec le Scheduler.
+     * Update each observer by enqueue Update class Method Invocation
      *
-     * @param observerDeCapteurAsync L'ObserverDeCapteurAsync à mettre à jour.
-     * @return Un Future<Void> représentant l'état de la mise à jour.
+     * @param observerDeCapteurAsync canal
+     * @return future return by scheduler
      */
     @Override
     public Future<Void> update(ObserverDeCapteurAsync observerDeCapteurAsync) {
@@ -50,9 +49,7 @@ public class Canal implements ObserverDeCapteurAsync {
     }
 
     /**
-     * Récupère la valeur du capteur à partir de l'AlgoDiffusion.
-     *
-     * @return Un objet GetValue contenant la valeur du capteur.
+     * @see AlgoDiffusion
      */
     @Override
     public GetValue getValue() {

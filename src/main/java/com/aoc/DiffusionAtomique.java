@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Future;
 
+/**
+ * atomic diffusion strategy
+ */
 public class DiffusionAtomique implements AlgoDiffusion{
 
     private Capteur capteur;

@@ -58,11 +58,11 @@ public class Afficheur implements ObserverDeCapteur {
         return valuesToString.toString();
     }
 
+    /**
+     * return current value read
+     * @return currentValue
+     */
     public int getCurrentValue() {
         return currentValue;
-    }
-
-    public void setCurrentValue(int currentValue) {
-        this.currentValue = currentValue;
     }
 }
